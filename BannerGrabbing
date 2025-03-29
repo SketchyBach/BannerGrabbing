@@ -1,0 +1,79 @@
+#!/bin/bash
+#Made by SKetchyBach <3 
+# Port Scanner and Banner Grabber - A simple tool to scan open ports and grab service banners
+
+# Function to perform port scanning
+scan_ports() {
+    local target=$1
+    local start_port=$2
+    local end_port=$3
+    
+    echo "[+] Scanning $target for open ports from $start_port to $end_port..."
+    
+    # Loop over the range of ports
+    for (( port=$start_port; port<=$end_port; port++ )); do
+        # Check if the port is open
+        timeout 1 bash -c "echo > /dev/tcp/$target/$port" 2>/dev/null && echo "[+] Port $port is OPEN"
+    done
+}
+
+# Function to grab the banner of a service running on a given port
+grab_banner() {
+    local target=$1
+    local port=$2
+
+    echo "[+] Attempting to grab banner from $target on port $port..."
+
+    # Use netcat (nc) to grab the banner
+    banner=$(echo -e "GET / HTTP/1.0\r\n\r\n" | nc -v -w 3 $target $port 2>/dev/null)
+    
+    if [ -n "$banner" ]; then
+        echo "[+] Banner for port $port:"
+        echo "$banner"
+    else
+        echo "[-] No banner found on port $port."
+    fi
+}
+
+# Function to display the menu
+display_menu() {
+    echo "--------------------------------------------"
+    echo "  Port Scanner and Banner Grabber Tool"
+    echo "--------------------------------------------"
+    echo "1. Scan for open ports on a target"
+    echo "2. Grab banner from a specific port"
+    echo "3. Exit"
+    echo "--------------------------------------------"
+    read -p "Choose an option (1/2/3): " choice
+    return $choice
+}
+
+# Main script logic
+while true; do
+    display_menu
+    case $? in
+        1)
+            # Option 1: Scan for open ports
+            read -p "Enter the target IP or hostname: " target_ip
+            read -p "Enter the starting port: " start_port
+            read -p "Enter the ending port: " end_port
+            scan_ports "$target_ip" "$start_port" "$end_port"
+            ;;
+        2)
+            # Option 2: Grab a banner from a specific port
+            read -p "Enter the target IP or hostname: " target_ip
+            read -p "Enter the port to grab the banner from: " port
+            grab_banner "$target_ip" "$port"
+            ;;
+        3)
+            # Option 3: Exit
+            echo "Exiting..."
+            exit 0
+            ;;
+        *)
+            # Invalid choice
+            echo "Invalid choice, please try again."
+            ;;
+    esac
+done
+
