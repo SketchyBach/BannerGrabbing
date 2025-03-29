@@ -1,11 +1,11 @@
 # SketchyBach's BannerGrabbing Tool
 
-Welcome to my BannerGrabbing Tool, a Python-based code designed for educational and authorized penetration testing. The tool is a very simple tool that scans open ports and grab service banners
+Welcome to my BannerGrabbing Tool, a BashShell-based code designed for educational and authorized penetration testing. The tool is a very simple tool that scans open ports and grab service banners
 
 ---
 ## About Myself :\
 
-Hi, I'm Sketchy Bach and I'm a cybersecurity enthusiast with a passion for developing CyberSecurity tools . Connect with me on [LinkedIn Profile](https://www.linkedin.com/in/yarin-suisa) to discuss cybersecurity, job opportunities, or just to say hi! This project is a showcase of my skills in Python,and network knowledge. 
+Hi, I'm Sketchy Bach and I'm a cybersecurity enthusiast with a passion for developing CyberSecurity tools . Connect with me on [LinkedIn Profile](https://www.linkedin.com/in/yarin-suisa) to discuss cybersecurity, job opportunities, or just to say hi! This project is a showcase of my skills in Bash Scripting,and network knowledge. 
 
 ## Disclaimer : The code of this tool was tweaked at the end with an ai tool to make it look better , it was written completely by me and not written by it. 
 
